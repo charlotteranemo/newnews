@@ -102,7 +102,7 @@ router.post("/news/update/:id", function(req,resp) {
 			}
 		});
 	} else {
-		resp.send("You can't leave the fields empty!");
+		resp.redirect("/admin.html");
 	}
     
 });
