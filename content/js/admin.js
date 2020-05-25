@@ -309,6 +309,16 @@ class Form extends React.Component {
         });
     }
 
+    componentDidMount() {
+        this.setState({valueTitle: this.props.Title});
+        this.setState({valueContent: this.props.Content});
+    }
+
+    componentWillUnmount(event) {
+        this.setState({valueTitle: event.target.value});
+        this.setState({valueContent: event.target.value});
+    }
+
     handleChangeOfTitle(event) {
         this.setState({valueTitle: event.target.value});
     }
@@ -335,7 +345,7 @@ class Form extends React.Component {
                     <form>
                         <button onClick={this.handleClosing} className="closeButton">X</button>
                     </form>
-                    <form method="POST" className="editForm" action={"/news/update/" + this.props.ID} onSubmit={() => editNews(this.props.ID)}>
+                    <form method="POST" className="editForm" action={"/news/update/" + this.props.ID} onSubmit={this.handleValidInput}>
                         <label htmlFor="newsTitle2">New title:</label><br />
                         <input type="text" name="newsTitle2" placeholder="Newstitle" id="newsTitle2" defaultValue={this.props.Title} onChange={this.handleChangeOfTitle} /><br />
                         <label htmlFor="newsContent2">New content:</label><br />
